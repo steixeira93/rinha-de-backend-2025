@@ -52,11 +52,12 @@ services:
       RPC_ADDR: "cache:9090"
       PROCESSOR_DEFAULT_URL: "http://processor-default:8080"
       PROCESSOR_FALLBACK_URL: "http://processor-fallback:8080"
-      MAX_CONCURRENT_JOBS: "100"
-      BATCH_SIZE: "50"
-      PROCESSING_TIMEOUT: "30s"
+      MAX_CONCURRENT_JOBS: "200"
+      BATCH_SIZE: "100"
+      PROCESSING_TIMEOUT: "10s"
       HEALTH_CHECK_INTERVAL: "5s"
-      CIRCUIT_BREAKER_THRESHOLD: "10"
+      CIRCUIT_BREAKER_THRESHOLD: "5"
+      QUEUE_SIZE: "50000"
     depends_on:
       - cache
     networks:
@@ -75,6 +76,7 @@ services:
     hostname: cache
     environment:
       RPC_ADDR: ":9090"
+      QUEUE_SIZE: "50000"
     networks:
       - backend-network
     deploy:
